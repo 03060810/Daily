@@ -1,0 +1,164 @@
+body {
+	display: flex;
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	margin: 0; /* Loại bỏ khoảng cách mặc định */
+	padding: 0;
+	font-family: consolas;
+	text-align: center;
+	scrollbar-width: none;
+	box-sizing: border-box !important;
+}
+
+.container{
+	display: block;
+	width: 100vw;
+	height: 100vh;
+}
+.header {
+	display: grid;
+	place-items: center;
+	width: 90vw;
+	height: 20vh;
+	top: 0;
+	position: relative;
+	overflow: auto;
+	padding: 0 2vw;
+	border: double;
+	text-align: justify;
+	box-sizing: inherit;
+	margin: 0 auto;
+	border-radius: 5vh;
+	border-color: rgb(240, 240, 240);
+	border-style: double;
+	box-sizing: border-box;
+}
+.quote-box {
+	position: relative;
+	display: flex;
+	flex-flow: wrap;
+	align-items: center;
+	padding: 2vw;
+	box-sizing: border-box;
+}
+
+.quote-box p {
+		color: #3e3e3e;
+		margin: 0;
+		font-style: italic;
+		text-align: left;
+}
+
+.quote-box .author {
+		text-align: right;
+		margin-top: 1vh;
+		color: #6b4f3f;
+		font-weight: 500;
+}
+#result {
+	font-family: consolas;
+	display: block;
+	text-align: center;
+	width: 90vw;
+	height: 77vh;
+	box-sizing: border-box;
+	margin: 0 auto;
+	margin-top: 3vh;
+}		
+.card-wrapper {
+	font-family: consolas;
+	display: block;
+	text-align: center;
+	height: 72vh;
+	overflow: hidden;
+	scroll-snap-type: y mandatory;
+	scroll-snap-align: start;
+	position: relative;
+}		
+.card-wrapper::-webkit-scrollbar {
+	display: none; /* Chrome, Safari */
+}
+.cardbox {
+	border-color: rgb(240, 240, 240);
+	border-style: double;
+	margin: 0 auto;
+	border-radius: 5vh;
+	height: 72vh;
+	width: 42vh;
+	overflow: hidden;
+	scroll-snap-align: start;
+	box-sizing: border-box !important;
+}
+.meaning {
+	border-color: rgb(240, 240, 240);
+	border-style: double;
+	margin: 0 auto;
+	border-radius: 2.5vh;
+	height: 72vh;
+	width: 90vw;
+	overflow: scroll;
+	scroll-snap-align: start;
+	scrollbar-width: none;
+	text-align: justify;
+	box-sizing: border-box;
+    padding: 2vh 2vw;
+}
+.meaning::-webkit-scrollbar {
+	display: none; /* Chrome, Safari */
+}
+.back {
+	height: 72vh;
+	width: 42vh;
+}
+.hidden {
+	display: none !important;
+}
+.front{
+	display: flex;
+	flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+	align-items: center; /* Căn giữa hình ảnh và text theo chiều ngang */
+	justify-content: flex-start; /* Căn text phía trên */
+	height: auto; /* Chiều cao linh hoạt theo nội dung */
+	overflow: hidden; /* Tránh tràn ra ngoài */
+}
+.text{
+	margin: 2vh;
+}
+.cardname{
+	display: block;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 5vh;
+	font-size: 3vh;
+}
+.side{
+	display: block;
+	font-weight: bold;
+}
+.small-img {
+	max-width: 80%; /* Chiều rộng tự động khớp với card box */
+	height: auto; /* Giữ tỷ lệ gốc của hình */
+	max-height: 70vh; /* Giới hạn chiều cao của hình ảnh, không vượt quá card box */
+	object-fit: contain; /* Đảm bảo toàn bộ hình ảnh hiển thị đầy đủ */
+	margin-bottom: 5px;
+}
+.down {
+	transform: rotate(180deg) !important;
+}
+
+
+.toggle-view-btn {
+	position: absolute;
+	width: 10vw;
+	height: 10vh;
+	bottom: 5vh;
+	right: 5vw;
+	background-color: transparent;
+	display: block;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	z-index: 9999;
+	opacity: 1; /* hoàn toàn trong suốt */
+	border-color: rgba(255, 0, 0, 0.2); /* đỏ với độ trong suốt 20% */
+	border-radius: 5vh;
+}

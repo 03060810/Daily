@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Daily</title>
+	<link rel="stylesheet" href="daily.css">
+</head>
+
+<body>
+<div class="container">
+	<div class="header" id="header-content">
+		<div class="quote-box">
+			<div>
+				<p id="quote"></p>
+				<div class="author" id="author"></div>
+			</div>
+		</div>
+	</div>
+	<div class="result" id="result">
+	</div>
+</div>
+<script src="daily.js"></script>
+<script src="quotes.js"></script>
+<script>
+		
+	let numberOfData = []; // Mảng lưu các giá trị random {a, b}
+	let usedValues = new Set(); // Tập hợp lưu các giá trị a đã được sử dụng
+
+
+	document.addEventListener('DOMContentLoaded', () => {
+		// Làm rỗng mảng và tập hợp trước khi thêm giá trị mới
+		numberOfData = [];
+		usedValues.clear();
+		const spreadCount = 1; // Giá trị mặc định là 1 nếu không nhập gì
+		let randomA;
+		do {
+			randomA = Math.floor(Math.random() * 86) + 1;
+		} while (usedValues.has(randomA));
+		usedValues.add(randomA);
+
+		const randomB = (Math.floor(Math.random() * 1000) + 1) % 2;
+		const side = randomB === 1 ? "upright" : "reversed";
+
+		const card = data1[randomA - 1];
+
+		numberOfData.push({
+			a: randomA,
+			b: randomB,
+			cardname: card.text,
+			img: card.img,
+			side: side,
+		});
+
+		// Hiển thị giá trị đầu tiên trong result
+		const resultDiv = document.getElementById('result');
+		resultDiv.innerHTML = '';
+		const firstCard = numberOfData[0];
+
+		const rawText = card.text;
+		const cardName = rawText.split('</div>')[0].trim();
+
+		const meaningText = cardData[cardName]?.[side === "upright" ? 0 : 1] || "Không có dữ liệu nghĩa cho lá này.";
+
+		// Chọn mảng dữ liệu theo chiều
+		const dataArray = side === "upright" ? Um[cardName] : Rm[cardName];
+
+		function getRandomQuote() {
+			const index = Math.floor(Math.random() * quotes.length);
+			return quotes[index];
+		}
+
+		// Gọi hàm và gán kết quả vào phần tử
+		const q = getRandomQuote();
+		document.getElementById("quote").textContent = q.quote;
+		document.getElementById("author").textContent = q.author;
+
+
+		resultDiv.insertAdjacentHTML('beforeend', `
+			<div id="card-1" class="card-wrapper">
+			<div class="cardbox page">
+			<div class="front">
+			<div class="text">
+			<div class="cardname">${firstCard.cardname}
+			</div>
+			<img src="${firstCard.img}" alt="Card Image" class="small-img ${firstCard.side === 'reversed' ? 'down' : ''}">
+			</div>
+			<img class="back hidden ${firstCard.side === 'reversed' ? 'down' : ''}" src="${firstCard.img}" alt="Card Back">
+			</div>
+			<div class="meaning page hidden">${meaningText}</div>
+			<button class="toggle-view-btn" id="btn-1"></button>
+			</div>
+		`);
+
+		attachFlipLogic();
+	});
+	//Flip
+	function attachFlipLogic() {
+		const cardboxes = document.querySelectorAll('.cardbox');
+		cardboxes.forEach(cardbox => {
+			const frontElement = cardbox.querySelector('.front');
+			const backElement = cardbox.querySelector('.back');
+
+			cardbox.addEventListener('click', () => {
+				const isFrontHidden = frontElement.classList.contains('hidden');
+
+				if (isFrontHidden) {
+					frontElement.classList.remove('hidden');
+					backElement.classList.add('hidden');
+				} else {
+					frontElement.classList.add('hidden');
+					backElement.classList.remove('hidden');
+				}
+			});
+		});
+	}
+	//End Flip
+
+	document.addEventListener('click', function (e) {
+	attachFlipLogic(); // Gọi hàm flip
+		const btn = e.target.closest('.toggle-view-btn');
+		if (!btn) return;
+
+		const wrapper = btn.closest('.card-wrapper');
+		const cardbox = wrapper.querySelector('.cardbox');
+		const meaning = wrapper.querySelector('.meaning');
+		const isShowingMeaning = !meaning.classList.contains('hidden');
+
+		meaning.classList.toggle('hidden', isShowingMeaning);
+		cardbox.classList.toggle('hidden', !isShowingMeaning);
+	});
+
+</script>
+</body>
+</html>
