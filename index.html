@@ -129,7 +129,27 @@
 		meaning.classList.toggle('hidden', isShowingMeaning);
 		cardbox.classList.toggle('hidden', !isShowingMeaning);
 	});
+	function applyRandomTheme() {
+		// Tạo màu pastel ngẫu nhiên
+		const randomPastel = () => {
+			const hue = Math.floor(Math.random() * 360);
+			const saturation = 40 + Math.random() * 20;
+			const lightness = 70 + Math.random() * 20;
+			return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+		};
 
+		// Tạo gradient từ 2 màu pastel
+		const randomGradient = () => {
+			const c1 = randomPastel();
+			const c2 = randomPastel();
+			return `linear-gradient(135deg, ${c1}, ${c2})`;
+		};
+
+		// Áp dụng gradient cho body
+		const randomTheme = randomGradient();
+		document.body.style.background = randomTheme;
+	}
+	window.onload = applyRandomTheme;
 </script>
 </body>
 </html>
